@@ -38,7 +38,7 @@ export default function Home() {
     return (<>
 
         {/* div principal onde vai centralizar todos os itens da tela */}
-        <div className="flex w-full border-b-1 border-gray-300 justify-between">
+        <div className="flex w-full border-b border-gray-300 justify-between">
             <div className="flex items-center">
                 <h1 className="text-[30px] ml-10">
                     Login-Page

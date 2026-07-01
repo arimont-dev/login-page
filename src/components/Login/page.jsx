@@ -199,7 +199,7 @@ export default function Login({ title }) {
                     </div>
 
                     {/* botão de enviar */}
-                    <button className="p-2 rounded-2xl from-blue-600 to-blue-500 shadow-lg  bg-gradient-to-r text-white hover:cursor-pointer hover:scale-98 transition-all duration-300 mt-10 w-60" type="submit" >Entrar</button>
+                    <button className="p-2 rounded-2xl from-blue-600 to-blue-500 shadow-lg  bg-linear-to-r text-white hover:cursor-pointer hover:scale-98 transition-all duration-300 mt-10 w-60" type="submit" >Entrar</button>
                 </form>
             </div>
         </div>
