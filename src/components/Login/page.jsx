@@ -1,10 +1,16 @@
 "use client"
-import { useState } from "react"
+
+import { useState} from "react"
 import { Eye, EyeOff } from "lucide-react"
+import { useRouter } from "next/navigation"
+import Load from "@/components/Loading/page"
 
 
 export default function Login({ title }) {
 
+
+    // rota
+    const router = useRouter()
 
     // essas constantes abaixo serve para pegar o valor do email e senha para ser utilizado futuramente
     const [inputEmail, setInputEmail] = useState("")
@@ -17,6 +23,8 @@ export default function Login({ title }) {
     // essa constante serve para verificar se a senha esta visivel ou não
     const [isSenhaVisivel, setIsSenhaVisivel] = useState(false)
 
+    // essa constante serve para verificar se a tela esta carregando ou não, para poder mostrar o spinner de carregamento
+    const [carregando, setCarregando] = useState(false)
 
     // apaga a mensagem de erro ao clicar em qualquer um dos inputs
     if (isFocusEmail) {
@@ -32,9 +40,11 @@ export default function Login({ title }) {
 
     // uma constante que é chamada assim que aperta o botao de logar
     const logar = (async (e) => {
-
+        
         // previne que o formulário faça suas ações padrões 
         e.preventDefault()
+
+        setCarregando(true)
 
         // apaga as mensagens de erro que estão na tela
         const emailError = document.getElementById("emailError")
@@ -65,12 +75,16 @@ export default function Login({ title }) {
                         // adiciona o token ao localStorage para poder ser utilizado em demais abas
                         localStorage.setItem("token", data.token)
                     }
-                    window.location.href = "/home"
+
+                    setCarregando(false)
+                    router.push("/home")
                 }
 
 
                 // caso de erro, ele vai verificar se o erro é do email ou da senha e vai mostrar a mensagem de erro na tela
                 if (data.sucesso === false) {
+
+                    setCarregando(false)
 
                     // caso o erro seja do email
                     if (data.tipo === "email") {
@@ -133,6 +147,7 @@ export default function Login({ title }) {
 
                         }, 500)
                     }
+
                 }
             })
 
@@ -141,13 +156,14 @@ export default function Login({ title }) {
 
 
 
-
-
-
     return (
 
         // div que centraliza o card na tela
         <div className="flex justify-center items-center text-center h-dvh">
+
+            {carregando ? <Load /> : null}
+
+
 
 
             {/* card de login */}

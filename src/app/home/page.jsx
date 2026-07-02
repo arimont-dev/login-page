@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
-import Header from "@/components/Header/page"
+import Inicio from "@/components/Inicio/page"
+import Load from "@/components/Loading/page"
 
 export default function PaginaInicial() {
 
@@ -26,8 +27,9 @@ export default function PaginaInicial() {
 
 
     if (carregando) {
-        return <p>carregando...</p>
-    } else {
-        return <Header/>
+        return <Load />
+    } else
+    {
+        return <Inicio />
     }
 }   

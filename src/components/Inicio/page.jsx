@@ -4,26 +4,32 @@ import { jwtDecode } from "jwt-decode"
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 
-export default function Home() {
+export default function Inicio() {
 
     // pega o token do localStorage
-    const token = localStorage.getItem("token")
+    const [token, setToken] = useState(null)
 
     const router = useRouter()
 
     function Logout() {
-        if (token) {
+
             localStorage.removeItem("token")
             alert("Você foi deslogado com sucesso, redirecionando ao login....")
             router.push("/")
-        }
-
+            setToken(null)
+            setUsuario(null)
     }
 
     const [usuario, setUsuario] = useState(null)
 
     useEffect(() => {
+
+        const token = localStorage.getItem("token")
+
         if (token) {
+
+            setToken(token)
+
             // decodifica o token para poder pegar as informações do usuario
             const data = jwtDecode(token)
             setUsuario(data)
